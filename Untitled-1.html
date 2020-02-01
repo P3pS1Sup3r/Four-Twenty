@@ -1,0 +1,24 @@
+<html>
+    <!-- <head>
+        <script type="text/javascript" src="Untitled-111.js"></script>
+    </head> -->
+    <p id=88 style="color: brown;"> opera </p>
+    <!-- <script type="text/javascript" src="Untitled-111.js"></script> -->
+    <script type="text/javascript">
+        var reqestJson = "http://worldtimeapi.org/api/timezone/America/Argentina/Salta";
+        var reqest = new XMLHttpRequest();
+        reqest.open('GET', reqestJson);
+        reqest.responseType = 'json';
+        reqest.send();
+        // console.log(reqest);
+        reqest.onload = function() {
+            var superHeroes = reqest.response;
+            console.log(superHeroes);
+            alert(superHeroes['datetime']);
+        }
+        // var superH = reqest.response;
+        // console.log(reqest);
+        // alert(reqest.response['squadName']);
+        // alert(superH['squadName']);
+    </script>
+</html>
