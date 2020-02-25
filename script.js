@@ -1,7 +1,8 @@
 window.onload = function() {
 	
+	
 	var time_list = [
-	"2020-02-05T03:21:14.670028+00:00",
+	"2020-02-25T03:21:14.670028+00:00",
 	"2020-02-05T12:19:14.662459+01:00",
 	"2020-02-05T13:19:14.654707+02:00",
 	"2020-02-05T04:19:14.654578+00:00",
@@ -24,7 +25,7 @@ window.onload = function() {
 	
 	var N_date_list = [];
 	
-	var need_timezone;
+	var need_timezone = new Date();
 	
 	/*var reqestJson = "http://worldtimeapi.org/api/timezone/America/Argentina/Salta";
 	var reqest = new XMLHttpRequest();
@@ -42,13 +43,14 @@ window.onload = function() {
 	//console.log (time_list);
 	
 	Time_to_Data();
-	console.log(date_list);
+	console.log((date_list[0]-date_list[14]) / (60*60*1000));
 	Close_time();
 	
 	console.log ("420");
 	console.log (N_date_list);
 	console.log ("soon");
 	console.log (soon_date_list);
+	console.log ("calc");
 	
 	Calculation_UTP ();
 	
@@ -106,14 +108,40 @@ window.onload = function() {
 		
 		reqest.onload = function() {
 			var abidjan_time_s = reqest.response;
+			
 			var abidjan_time = new Date (abidjan_time_s['datetime'].substr(0,16));
-			need_timezone = 4-abidjan_time.getHours();
+			console.log ("abidjan_time");
+			console.log (abidjan_time);
+			need_timezone = new Date();
+			//need_timezone = 4-abidjan_time.getHours();
+			
+			if (abidjan_time.getHours() >= 4 & abidjan_time.getHours() <= 16)
+				need_timezone = abidjan_time;
+		
+			if (abidjan_time.getHours() >= 16 & abidjan_time.getHours() <= 4 )
+				need_timezone.setDate(1);
+			
+			
+			need_timezone.setHours(4);
+			need_timezone.setMinutes(20);
+			
+			var abidjan_time = new Date (abidjan_time_s['datetime'].substr(0,16));
+			
 			console.log(need_timezone);
+			
+			console.log ("abidjan_time");
+			console.log (abidjan_time);
+			
+			let need_hours=(date_list[0] - abidjan_time) / (60*60*1000);
+			
+			console.log(need_hours);
+			
 			timezones.forEach (function(value,key) {
 				if (String(value)==String(need_timezone)) console.log(key);
 			});
 		}
 	}	
+	
 	
 	
 }
